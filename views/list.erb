@@ -1,0 +1,22 @@
+<html>
+  <head>
+    <link rel="stylesheet" type="text/css" href="/stylesheets/normalize.css"></link>
+        <link rel="stylesheet" type="text/css" href="/stylesheets/application.css"></link>
+
+  </head>
+  <body>
+
+    <ul>
+    <% @tracks.each do |track| %>
+      <li>
+        <% if track["image"][3]["content"] %>
+          <img src="<%= track["image"][3]["content"] %>" alt="<%= track["album"]["content"] %>" />
+        <% else %>
+          <img src="http://placekitten.com/g/300/300" />
+        <% end %>
+        <span><%= track["artist"]["content"] %> - <%= track["name"] %></span>
+      </li>
+    <% end %>
+    </ul>
+  </body>
+</html>
