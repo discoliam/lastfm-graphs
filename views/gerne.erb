@@ -1,0 +1,68 @@
+<html>
+  <head>
+    <link rel="stylesheet" type="text/css" href="/assets/normalize.css"></link>
+    <link rel="stylesheet" type="text/css" href="/assets/application.css"></link>
+  </head>
+  <body>
+
+  <h1>Example</h1>
+  <table>
+    <tr>
+      <th>Month</th>
+      <th>Rock</th>
+      <th>Pop</th>
+      <th>Punk</th>
+    </tr> 
+    <tr>
+      <td>Dec 12</td>
+      <td>5</td>
+      <td>9</td>
+      <td>10</td>
+    </tr>
+    <tr>
+     <td>Jan 13</td>
+      <td>5</td>
+      <td>9</td>
+      <td>10</td>
+    </tr>
+    <tr>
+      <td>Feb 13</td>
+      <td>5</td>
+      <td>9</td>
+      <td>10</td>
+    </tr>
+  </table>
+
+  <h2>Real</h2>
+
+  <%
+    lastfm = Lastfm.new('46cb8cdfeeea4f53ed9b439d46ae0e05', 'b3cad171632a35c8b986cc676a6ea941')
+    tracks = lastfm.user.get_recent_tracks(:user => 'discoliam', :limit => 200)
+  %>
+
+  <ul>
+    <% tracks.each do |played| %>
+      <li>
+
+        <%
+          track_mbid = played["mbid"]
+          track_artist = played["artist"]["content"]
+          track_name = played["name"]
+
+          tags = lastfm.track.get_top_tags(:mbid => track_mbid, :user => 'discoliam', :artist => track_artist, :track => track_name)
+        %>
+        
+   
+
+
+
+        <%= track_artist %> - <%= track_name %> - <%= tags[0]["name"] unless tags.nil?  %>
+
+      </li>
+    <% end %>
+    </ul>
+
+
+
+  </body>
+</html>
